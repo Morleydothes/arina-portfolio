@@ -4,12 +4,12 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { useState } from "react";
 
-import type { GalleryImage } from "@/lib/images";
+import type { PortfolioImage } from "@/lib/images";
 
 import { Lightbox } from "./lightbox";
 
 type MasonryGridProps = {
-  images: GalleryImage[];
+  images: PortfolioImage[];
 };
 
 export function MasonryGrid({ images }: MasonryGridProps) {
@@ -33,7 +33,7 @@ export function MasonryGrid({ images }: MasonryGridProps) {
       <div className="columns-1 gap-6 md:columns-2 xl:columns-3">
         {images.map((image, index) => (
           <motion.button
-            key={image.src}
+            key={`${image.src}-${index}`}
             type="button"
             onClick={() => open(index)}
             initial={{ opacity: 0, y: 30 }}
@@ -49,7 +49,7 @@ export function MasonryGrid({ images }: MasonryGridProps) {
                 alt={image.alt}
                 width={image.width}
                 height={image.height}
-                placeholder="blur"
+                placeholder={image.blurDataURL ? "blur" : "empty"}
                 blurDataURL={image.blurDataURL}
                 className="h-auto w-full object-cover transition duration-700 group-hover:scale-[1.035]"
               />

@@ -1,11 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { homeCategories } from "@/lib/images";
+import type { HomeCategoryCard } from "@/lib/images";
 
 import { Reveal } from "./reveal";
 
-export function PreviewGrid() {
+type PreviewGridProps = {
+  categories: HomeCategoryCard[];
+};
+
+export function PreviewGrid({ categories }: PreviewGridProps) {
   return (
     <section className="px-6 py-20 sm:px-10 lg:px-16 lg:py-24">
       <div className="mx-auto max-w-7xl">
@@ -25,7 +29,7 @@ export function PreviewGrid() {
         </div>
 
         <div className="grid gap-6 lg:grid-cols-3">
-          {homeCategories.map((category, index) => (
+          {categories.map((category, index) => (
             <Reveal key={category.href} delay={index * 0.1}>
               <Link
                 href={category.href}
@@ -36,7 +40,7 @@ export function PreviewGrid() {
                     src={category.image.src}
                     alt={category.image.alt}
                     fill
-                    placeholder="blur"
+                    placeholder={category.image.blurDataURL ? "blur" : "empty"}
                     blurDataURL={category.image.blurDataURL}
                     className="object-cover transition duration-700 group-hover:scale-[1.04]"
                   />

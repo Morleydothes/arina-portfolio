@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Arina Portfolio
 
-## Getting Started
+Фотопортфолио на Next.js с публичным сайтом на Vercel и встроенным Sanity Studio.
 
-First, run the development server:
+## Локальный запуск
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Сайт откроется на [http://localhost:3000](http://localhost:3000), а Studio после настройки Sanity будет доступна на [http://localhost:3000/studio](http://localhost:3000/studio).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Переменные окружения
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Скопируй `.env.example` в `.env.local` и заполни:
 
-## Learn More
+```bash
+NEXT_PUBLIC_SANITY_PROJECT_ID=
+NEXT_PUBLIC_SANITY_DATASET=production
+SANITY_PROJECT_ID=
+SANITY_DATASET=production
+SANITY_REVALIDATE_SECRET=
+```
 
-To learn more about Next.js, take a look at the following resources:
+`NEXT_PUBLIC_SANITY_PROJECT_ID` и `NEXT_PUBLIC_SANITY_DATASET` нужны сайту и Studio.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+`SANITY_REVALIDATE_SECRET` нужен для вебхука, который будет обновлять сайт без ручного деплоя.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Что уже подключено
 
-## Deploy on Vercel
+- Встроенный `Sanity Studio` на маршруте `/studio`
+- Схемы: `category`, `photo`, `aboutPage`, `siteSettings`
+- Фолбэк на локальные данные, если Sanity ещё не настроен
+- ISR с `revalidate = 60`
+- API-маршрут для revalidation: `/api/revalidate`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Что нужно сделать в Sanity
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Создать Sanity-проект.
+2. Взять `project ID` и `dataset`.
+3. Добавить эти значения в локальные `.env.local` и в переменные окружения проекта на Vercel.
+4. Разрешить в Sanity CORS для домена Vercel.
+5. Настроить webhook на `POST /api/revalidate` с заголовком `x-revalidate-secret`.
+
+После этого контент можно будет редактировать прямо через `/studio`, а сайт начнёт читать данные из CMS.

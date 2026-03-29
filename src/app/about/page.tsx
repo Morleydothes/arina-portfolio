@@ -1,13 +1,19 @@
+import type { PortableTextBlock } from "@portabletext/react";
 import Image from "next/image";
 
 import { Footer } from "@/components/footer";
 import { Navigation } from "@/components/navigation";
 import { PageReveal } from "@/components/page-reveal";
+import { PortableTextContent } from "@/components/portable-text-content";
 import { Reveal } from "@/components/reveal";
 import { SocialLinks } from "@/components/social-links";
-import { aboutImages, bioText } from "@/lib/images";
+import { getAboutPageData } from "@/sanity/lib/fetch";
 
-export default function AboutPage() {
+export const revalidate = 60;
+
+export default async function AboutPage() {
+  const data = await getAboutPageData();
+
   return (
     <>
       <PageReveal className="min-h-screen bg-bg-warm-paper text-text-ink-black">
@@ -25,21 +31,25 @@ export default function AboutPage() {
                   Зырянова
                 </h1>
               </div>
-              <p className="max-w-xl text-base leading-8 text-text-ink-black/72 sm:text-lg">
-                {bioText}
-              </p>
+              {data.bioText ? (
+                <PortableTextContent value={data.bioText as PortableTextBlock[]} />
+              ) : (
+                <p className="max-w-xl text-base leading-8 text-text-ink-black/72 sm:text-lg">
+                  {data.fallbackBioText}
+                </p>
+              )}
               <div className="space-y-4 rounded-[2rem] border border-text-ink-black/10 bg-white/55 p-6 backdrop-blur">
                 <p className="text-sm uppercase tracking-[0.35em] text-text-ink-black/55">
                   contact
                 </p>
-                <SocialLinks />
+                <SocialLinks links={data.socialLinks} />
               </div>
             </Reveal>
 
             <div className="grid gap-6 sm:grid-cols-2">
-              {aboutImages.map((image, index) => (
+              {data.travelPhotos.map((image, index) => (
                 <Reveal
-                  key={image.src}
+                  key={`${image.src}-${index}`}
                   delay={index * 0.08}
                   className={index === 0 ? "sm:col-span-2" : ""}
                 >
@@ -50,7 +60,7 @@ export default function AboutPage() {
                         alt={image.alt}
                         width={image.width}
                         height={image.height}
-                        placeholder="blur"
+                        placeholder={image.blurDataURL ? "blur" : "empty"}
                         blurDataURL={image.blurDataURL}
                         className={`h-auto w-full object-cover ${
                           index === 0 ? "aspect-[16/10]" : "aspect-[3/4]"
@@ -64,7 +74,10 @@ export default function AboutPage() {
           </section>
         </main>
       </PageReveal>
-      <Footer />
+      <Footer
+        photographerName={data.photographerName}
+        socialLinks={data.socialLinks}
+      />
     </>
   );
 }

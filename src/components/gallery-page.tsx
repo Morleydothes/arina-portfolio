@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import type { GalleryImage } from "@/lib/images";
+import type { PortfolioImage } from "@/lib/images";
 
 import { MasonryGrid } from "./masonry-grid";
 import { Navigation } from "./navigation";
@@ -10,7 +10,7 @@ type GalleryPageProps = {
   eyebrow: string;
   title: string;
   description: string;
-  images: GalleryImage[];
+  images: PortfolioImage[];
 };
 
 export function GalleryPage({

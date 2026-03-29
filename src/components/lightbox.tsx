@@ -4,10 +4,10 @@ import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import { useEffect } from "react";
 
-import type { GalleryImage } from "@/lib/images";
+import type { PortfolioImage } from "@/lib/images";
 
 type LightboxProps = {
-  images: GalleryImage[];
+  images: PortfolioImage[];
   currentIndex: number | null;
   onClose: () => void;
   onNext: () => void;
@@ -91,7 +91,7 @@ export function Lightbox({
               alt={activeImage.alt}
               fill
               sizes="100vw"
-              placeholder="blur"
+              placeholder={activeImage.blurDataURL ? "blur" : "empty"}
               blurDataURL={activeImage.blurDataURL}
               className="object-contain"
             />

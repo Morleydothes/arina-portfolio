@@ -1,17 +1,27 @@
 import { Footer } from "@/components/footer";
 import { GalleryPage } from "@/components/gallery-page";
-import { galleryImages } from "@/lib/images";
+import { getGalleryPageData, getHomePageData } from "@/sanity/lib/fetch";
 
-export default function PortraitsPage() {
+export const revalidate = 60;
+
+export default async function PortraitsPage() {
+  const [gallery, home] = await Promise.all([
+    getGalleryPageData("portraits"),
+    getHomePageData(),
+  ]);
+
   return (
     <>
       <GalleryPage
-        eyebrow="portraits"
-        title="портреты"
-        description="Портреты без лишнего шума: зерно, воздух, мягкий свет и внимание к состоянию человека. Неброско, близко и с характером."
-        images={galleryImages.portraits}
+        eyebrow={gallery.eyebrow}
+        title={gallery.title}
+        description={gallery.description}
+        images={gallery.images}
       />
-      <Footer />
+      <Footer
+        photographerName={home.photographerName}
+        socialLinks={home.socialLinks}
+      />
     </>
   );
 }

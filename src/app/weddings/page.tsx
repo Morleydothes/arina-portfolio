@@ -1,17 +1,27 @@
 import { Footer } from "@/components/footer";
 import { GalleryPage } from "@/components/gallery-page";
-import { galleryImages } from "@/lib/images";
+import { getGalleryPageData, getHomePageData } from "@/sanity/lib/fetch";
 
-export default function WeddingsPage() {
+export const revalidate = 60;
+
+export default async function WeddingsPage() {
+  const [gallery, home] = await Promise.all([
+    getGalleryPageData("weddings"),
+    getHomePageData(),
+  ]);
+
   return (
     <>
       <GalleryPage
-        eyebrow="weddings"
-        title="свадьбы"
-        description="Истории, где важны не только большие моменты, но и почти незаметные жесты. Тёплые кадры с воздухом, движением и вниманием к близости."
-        images={galleryImages.weddings}
+        eyebrow={gallery.eyebrow}
+        title={gallery.title}
+        description={gallery.description}
+        images={gallery.images}
       />
-      <Footer />
+      <Footer
+        photographerName={home.photographerName}
+        socialLinks={home.socialLinks}
+      />
     </>
   );
 }

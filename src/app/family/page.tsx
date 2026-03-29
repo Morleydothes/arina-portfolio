@@ -1,17 +1,27 @@
 import { Footer } from "@/components/footer";
 import { GalleryPage } from "@/components/gallery-page";
-import { galleryImages } from "@/lib/images";
+import { getGalleryPageData, getHomePageData } from "@/sanity/lib/fetch";
 
-export default function FamilyPage() {
+export const revalidate = 60;
+
+export default async function FamilyPage() {
+  const [gallery, home] = await Promise.all([
+    getGalleryPageData("family"),
+    getHomePageData(),
+  ]);
+
   return (
     <>
       <GalleryPage
-        eyebrow="family"
-        title="семья"
-        description="Неспешные кадры про тепло, дом, прогулки и ту близость, которая читается в руках, в расстоянии между людьми и в том, как они смотрят друг на друга."
-        images={galleryImages.family}
+        eyebrow={gallery.eyebrow}
+        title={gallery.title}
+        description={gallery.description}
+        images={gallery.images}
       />
-      <Footer />
+      <Footer
+        photographerName={home.photographerName}
+        socialLinks={home.socialLinks}
+      />
     </>
   );
 }

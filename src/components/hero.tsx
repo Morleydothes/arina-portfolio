@@ -4,18 +4,21 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import type { StaticImport } from "next/dist/shared/lib/get-img-props";
 
+import { defaultSiteIntro } from "@/lib/images";
+
 import { Navigation } from "./navigation";
 
 type HeroProps = {
   image: {
     src: string | StaticImport;
     alt: string;
-    blurDataURL: string;
+    blurDataURL?: string;
   };
   name: string;
+  intro?: string;
 };
 
-export function Hero({ image, name }: HeroProps) {
+export function Hero({ image, name, intro = defaultSiteIntro }: HeroProps) {
   const { scrollY } = useScroll();
   const translateY = useTransform(scrollY, [0, 500], [0, 60]);
   const scale = useTransform(scrollY, [0, 500], [1, 1.06]);
@@ -32,7 +35,7 @@ export function Hero({ image, name }: HeroProps) {
           alt={image.alt}
           fill
           priority
-          placeholder="blur"
+          placeholder={image.blurDataURL ? "blur" : "empty"}
           blurDataURL={image.blurDataURL}
           className="object-cover"
         />
@@ -52,8 +55,7 @@ export function Hero({ image, name }: HeroProps) {
         </div>
 
         <div className="hidden max-w-xs self-end rounded-[2rem] border border-white/20 bg-white/10 p-6 text-sm leading-7 text-white/80 backdrop-blur-md lg:block">
-          Тихие истории про людей, прикосновения, воздух и свет. Свадьбы,
-          семьи, портреты.
+          {intro}
         </div>
       </div>
     </section>

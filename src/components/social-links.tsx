@@ -1,20 +1,21 @@
-const links = [
-  { href: "https://t.me/vangogjiv", label: "telegram" },
-  { href: "https://instagram.com/", label: "instagram" },
-];
+import { defaultSocialLinks, type SocialLink } from "@/lib/images";
 
-export function SocialLinks() {
+type SocialLinksProps = {
+  links?: SocialLink[];
+};
+
+export function SocialLinks({ links = defaultSocialLinks }: SocialLinksProps) {
   return (
     <div className="flex flex-wrap items-center gap-4 text-sm uppercase tracking-[0.35em] text-text-ink-black/70">
       {links.map((link) => (
         <a
-          key={link.label}
-          href={link.href}
+          key={`${link.platform}-${link.url}`}
+          href={link.url}
           target="_blank"
           rel="noreferrer"
           className="transition-colors duration-300 hover:text-accent-dark-red"
         >
-          {link.label}
+          {link.platform}
         </a>
       ))}
     </div>

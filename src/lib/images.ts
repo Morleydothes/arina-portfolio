@@ -1,12 +1,24 @@
-export type GalleryImage = {
+export type PortfolioImage = {
   src: string;
   alt: string;
   width: number;
   height: number;
-  blurDataURL: string;
+  blurDataURL?: string;
 };
 
 export type GalleryCategory = "weddings" | "family" | "portraits";
+
+export type SocialLink = {
+  platform: string;
+  url: string;
+};
+
+export type HomeCategoryCard = {
+  href: string;
+  label: string;
+  eyebrow: string;
+  image: PortfolioImage;
+};
 
 const createBlur = (start: string, end: string) =>
   `data:image/svg+xml;base64,${Buffer.from(
@@ -25,7 +37,15 @@ const sepiaBlur = createBlur("#d6c1a4", "#8a6a5b");
 const roseBlur = createBlur("#d6b4ab", "#664846");
 const mossBlur = createBlur("#b4c0a0", "#585f4a");
 
-export const galleryImages: Record<GalleryCategory, GalleryImage[]> = {
+export const defaultPhotographerName = "Arina Zyryanova";
+
+export const defaultSiteIntro =
+  "Тихие истории про людей, прикосновения, воздух и свет. Свадьбы, семьи, портреты.";
+
+export const defaultFooterCopy =
+  "Свадьбы, семьи и портреты. Тихие истории с воздухом, светом и вниманием к человеку.";
+
+export const galleryImages: Record<GalleryCategory, PortfolioImage[]> = {
   weddings: [
     {
       src: "/images/weddings/wedding-01.jpg",
@@ -83,7 +103,7 @@ export const galleryImages: Record<GalleryCategory, GalleryImage[]> = {
   ],
 };
 
-export const aboutImages: GalleryImage[] = [
+export const aboutImages: PortfolioImage[] = [
   {
     src: "/images/about/about-01.jpg",
     alt: "Путешествие по тихому лесному маршруту",
@@ -107,7 +127,7 @@ export const aboutImages: GalleryImage[] = [
   },
 ];
 
-export const homeCategories = [
+export const homeCategories: HomeCategoryCard[] = [
   {
     href: "/weddings",
     label: "свадьбы",
@@ -126,9 +146,40 @@ export const homeCategories = [
     eyebrow: "gaze",
     image: galleryImages.portraits[0],
   },
-] as const;
+];
 
 export const heroImage = galleryImages.weddings[0];
 
+export const aboutTitle = "Арина\nЗырянова";
+
 export const bioText =
   "Аринка-Кабардинка ака Варя Дымная. Коллекционирую добрые истории, фотографирую людей и ем баклажановую икру. Хожу по лесам, ловлю рыбов, собираю ягодки и разговариваю по душам. Снимаю свадьбы, семьи и портреты — тихо, близко, на плёнку и цифру. Кубань — Алтай — Киргизия — Япония — и дальше.";
+
+export const defaultSocialLinks: SocialLink[] = [
+  { platform: "telegram", url: "https://t.me/vangogjiv" },
+  { platform: "instagram", url: "https://instagram.com/" },
+];
+
+export const galleryPageCopy: Record<
+  GalleryCategory,
+  { eyebrow: string; title: string; description: string }
+> = {
+  weddings: {
+    eyebrow: "weddings",
+    title: "свадьбы",
+    description:
+      "Истории, где важны не только большие моменты, но и почти незаметные жесты. Тёплые кадры с воздухом, движением и вниманием к близости.",
+  },
+  family: {
+    eyebrow: "family",
+    title: "семья",
+    description:
+      "Неспешные кадры про тепло, дом, прогулки и ту близость, которая читается в руках, в расстоянии между людьми и в том, как они смотрят друг на друга.",
+  },
+  portraits: {
+    eyebrow: "portraits",
+    title: "портреты",
+    description:
+      "Портреты без лишнего шума: зерно, воздух, мягкий свет и внимание к состоянию человека. Неброско, близко и с характером.",
+  },
+};
