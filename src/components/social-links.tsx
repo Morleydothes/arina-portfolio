@@ -6,7 +6,7 @@ type SocialLinksProps = {
 
 export function SocialLinks({ links = defaultSocialLinks }: SocialLinksProps) {
   return (
-    <div className="flex flex-wrap items-center gap-4 text-sm uppercase tracking-[0.35em] text-text-ink-black/70">
+    <div className="flex flex-wrap items-center gap-6 text-[11px] lowercase tracking-[0.25em] text-text-ink-black/55">
       {links.map((link) => (
         <a
           key={`${link.platform}-${link.url}`}

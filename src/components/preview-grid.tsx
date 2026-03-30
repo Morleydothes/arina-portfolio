@@ -9,49 +9,55 @@ type PreviewGridProps = {
   categories: HomeCategoryCard[];
 };
 
+const spans = [
+  "col-span-12 md:col-span-7",
+  "col-span-12 md:col-span-5",
+  "col-span-12 md:col-span-6 md:col-start-4",
+];
+
 export function PreviewGrid({ categories }: PreviewGridProps) {
   return (
-    <section className="px-6 py-20 sm:px-10 lg:px-16 lg:py-24">
-      <div className="mx-auto max-w-7xl">
-        <div className="mb-12 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-          <div>
-            <p className="mb-3 text-[11px] lowercase tracking-[0.48em] text-accent-dark-red">
-              selected work
-            </p>
+    <section className="px-10 py-24 lg:px-32 lg:py-32">
+      <div className="mx-auto max-w-[1600px]">
+        <div className="mb-14 grid grid-cols-12 gap-y-6 lg:mb-20">
+          <div className="col-span-12 lg:col-span-5">
             <h2 className="font-display text-4xl font-normal tracking-[-0.02em] text-text-ink-black sm:text-5xl">
               галереи
             </h2>
           </div>
-          <p className="max-w-2xl text-sm leading-relaxed text-text-ink-black/68 sm:text-base">
-            Камерное портфолио с разными ритмами: свадебные истории, семейные
-            прогулки и портреты, где можно задержаться взглядом.
-          </p>
+          <div className="col-span-12 lg:col-span-5 lg:col-start-8">
+            <p className="max-w-2xl text-base leading-relaxed text-text-ink-black/68">
+              Камерное портфолио с разными ритмами: свадебные истории, семейные
+              прогулки и портреты, где можно задержаться взглядом.
+            </p>
+          </div>
         </div>
 
-        <div className="grid gap-8 lg:grid-cols-3">
+        <div className="grid grid-cols-12 gap-y-12 md:gap-x-10 lg:gap-x-16 lg:gap-y-20">
           {categories.map((category, index) => (
-            <Reveal key={category.href} delay={index * 0.1}>
+            <Reveal
+              key={category.href}
+              delay={index * 0.12}
+              className={spans[index % spans.length]}
+            >
               <Link
                 href={category.href}
                 className="group block overflow-hidden transition-transform duration-500 hover:-translate-y-1"
               >
-                <div className="relative aspect-[3/4] overflow-hidden">
+                <div className="grain-frame relative aspect-[3/4] overflow-hidden">
                   <Image
                     src={category.image.src}
                     alt={category.image.alt}
                     fill
                     placeholder={category.image.blurDataURL ? "blur" : "empty"}
                     blurDataURL={category.image.blurDataURL}
-                    className="object-cover transition duration-700 group-hover:scale-[1.02]"
+                    className="object-cover transition duration-700 group-hover:scale-[1.015]"
                   />
                 </div>
-                <div className="flex items-end justify-between gap-4 pt-4">
-                  <p className="text-xl lowercase tracking-[0.02em] text-text-ink-black">
+                <div className="pt-5">
+                  <p className="text-2xl lowercase tracking-[0.01em] text-text-ink-black lg:text-3xl">
                     {category.label}
                   </p>
-                  <span className="text-[11px] lowercase tracking-[0.32em] text-text-ink-black/42 transition-colors group-hover:text-accent-dark-red">
-                    open
-                  </span>
                 </div>
               </Link>
             </Reveal>

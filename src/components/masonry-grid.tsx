@@ -12,6 +12,14 @@ type MasonryGridProps = {
   images: PortfolioImage[];
 };
 
+const spans = [
+  "col-span-12 md:col-span-7",
+  "col-span-12 md:col-span-5",
+  "col-span-12 md:col-span-4",
+  "col-span-12 md:col-span-8",
+  "col-span-12 md:col-span-6",
+];
+
 export function MasonryGrid({ images }: MasonryGridProps) {
   const [currentIndex, setCurrentIndex] = useState<number | null>(null);
 
@@ -30,7 +38,7 @@ export function MasonryGrid({ images }: MasonryGridProps) {
 
   return (
     <>
-      <div className="columns-1 gap-7 md:columns-2 xl:columns-3">
+      <div className="grid grid-cols-12 gap-y-12 md:gap-x-12 lg:gap-x-20 lg:gap-y-24">
         {images.map((image, index) => (
           <motion.button
             key={`${image.src}-${index}`}
@@ -39,11 +47,11 @@ export function MasonryGrid({ images }: MasonryGridProps) {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.7, delay: index * 0.08 }}
+            transition={{ duration: 1.2, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
             whileHover={{ y: -4 }}
-            className="group mb-7 block w-full break-inside-avoid overflow-hidden text-left"
+            className={`group block overflow-hidden text-left ${spans[index % spans.length]}`}
           >
-            <div className="relative overflow-hidden">
+            <div className="grain-frame relative overflow-hidden">
               <Image
                 src={image.src}
                 alt={image.alt}
@@ -51,7 +59,7 @@ export function MasonryGrid({ images }: MasonryGridProps) {
                 height={image.height}
                 placeholder={image.blurDataURL ? "blur" : "empty"}
                 blurDataURL={image.blurDataURL}
-                className="h-auto w-full object-cover transition duration-700 group-hover:scale-[1.02]"
+                className="h-auto w-full object-cover transition duration-700 group-hover:scale-[1.015]"
               />
             </div>
           </motion.button>
