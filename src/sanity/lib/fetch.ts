@@ -1,4 +1,5 @@
 import type {
+  GalleryCategory,
   HomeCategoryCard,
   PortfolioImage,
   SocialLink,
@@ -6,7 +7,9 @@ import type {
 import {
   aboutImages,
   bioText,
+  defaultFooterCopy,
   defaultPhotographerName,
+  defaultSiteIntro,
   defaultSocialLinks,
   galleryImages,
   galleryPageCopy,
@@ -33,6 +36,8 @@ type SanityPhotoDocument = {
 type HomePageResult = {
   siteSettings?: {
     photographerName?: string;
+    heroIntro?: string;
+    footerCopy?: string;
     telegramUrl?: string;
     instagramUrl?: string;
     heroPhoto?: SanityPhotoDocument;
@@ -40,8 +45,18 @@ type HomePageResult = {
   categories?: Array<{
     title?: string;
     slug?: { current?: string };
+    description?: string;
     previewPhoto?: SanityPhotoDocument;
   }>;
+};
+
+type GalleryPageResult = {
+  category?: {
+    title?: string;
+    slug?: { current?: string };
+    description?: string;
+  };
+  photos?: SanityPhotoDocument[];
 };
 
 type AboutPageResult = {
@@ -52,6 +67,7 @@ type AboutPageResult = {
   };
   siteSettings?: {
     photographerName?: string;
+    footerCopy?: string;
     telegramUrl?: string;
     instagramUrl?: string;
   };
@@ -97,9 +113,9 @@ export async function getHomePageData() {
 
         return {
           href: `/${slug}`,
-          label: category.title?.toLowerCase() || galleryPageCopy[slug as keyof typeof galleryPageCopy].title,
-          eyebrow:
-            slug === "weddings" ? "stories" : slug === "family" ? "kin" : "gaze",
+          label:
+            category.title?.toLowerCase() ||
+            galleryPageCopy[slug as keyof typeof galleryPageCopy].title,
           image: preview,
         };
       })
@@ -113,6 +129,8 @@ export async function getHomePageData() {
   return {
     photographerName:
       data?.siteSettings?.photographerName || defaultPhotographerName,
+    heroIntro: data?.siteSettings?.heroIntro || defaultSiteIntro,
+    footerCopy: data?.siteSettings?.footerCopy || defaultFooterCopy,
     hero,
     categories:
       categoriesFromSanity.length > 0 ? categoriesFromSanity : homeCategories,
@@ -120,13 +138,11 @@ export async function getHomePageData() {
   };
 }
 
-export async function getGalleryPageData(
-  slug: keyof typeof galleryImages,
-) {
-  const data = await sanityFetch<SanityPhotoDocument[]>(galleryPageQuery, { slug });
+export async function getGalleryPageData(slug: GalleryCategory) {
+  const data = await sanityFetch<GalleryPageResult>(galleryPageQuery, { slug });
 
   const imagesFromSanity =
-    data
+    data?.photos
       ?.map((photo) =>
         mapSanityImage(
           photo.image,
@@ -136,7 +152,8 @@ export async function getGalleryPageData(
       .filter((value): value is PortfolioImage => Boolean(value)) || [];
 
   return {
-    ...galleryPageCopy[slug],
+    title: data?.category?.title?.toLowerCase() || galleryPageCopy[slug].title,
+    description: data?.category?.description || galleryPageCopy[slug].description,
     images: imagesFromSanity.length > 0 ? imagesFromSanity : galleryImages[slug],
   };
 }
@@ -154,6 +171,7 @@ export async function getAboutPageData() {
   return {
     photographerName:
       data?.siteSettings?.photographerName || defaultPhotographerName,
+    footerCopy: data?.siteSettings?.footerCopy || defaultFooterCopy,
     bioText: data?.aboutPage?.bioText || null,
     fallbackBioText: bioText,
     travelPhotos: travelPhotos.length > 0 ? travelPhotos : aboutImages,

@@ -11,11 +11,13 @@ import { SocialLinks } from "./social-links";
 
 type FooterProps = {
   photographerName?: string;
+  footerCopy?: string;
   socialLinks?: SocialLink[];
 };
 
 export function Footer({
   photographerName = defaultPhotographerName,
+  footerCopy = defaultFooterCopy,
   socialLinks = defaultSocialLinks,
 }: FooterProps) {
   return (
@@ -26,7 +28,7 @@ export function Footer({
             {photographerName.toLowerCase()}
           </p>
           <p className="mt-3 max-w-xl text-base leading-relaxed text-text-ink-black/68">
-            {defaultFooterCopy}
+            {footerCopy}
           </p>
         </div>
         <div className="col-span-12 lg:col-span-3 lg:col-start-10">

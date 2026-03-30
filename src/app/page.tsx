@@ -13,12 +13,17 @@ export default async function Home() {
     <>
       <PageReveal className="bg-bg-warm-paper text-text-ink-black">
         <main>
-          <Hero image={data.hero} name={data.photographerName} />
+          <Hero
+            image={data.hero}
+            name={data.photographerName}
+            intro={data.heroIntro}
+          />
           <PreviewGrid categories={data.categories} />
         </main>
       </PageReveal>
       <Footer
         photographerName={data.photographerName}
+        footerCopy={data.footerCopy}
         socialLinks={data.socialLinks}
       />
     </>

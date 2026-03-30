@@ -83,6 +83,7 @@ export default async function AboutPage() {
       </PageReveal>
       <Footer
         photographerName={data.photographerName}
+        footerCopy={data.footerCopy}
         socialLinks={data.socialLinks}
       />
     </>

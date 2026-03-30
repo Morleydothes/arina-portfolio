@@ -16,7 +16,6 @@ export type SocialLink = {
 export type HomeCategoryCard = {
   href: string;
   label: string;
-  eyebrow: string;
   image: PortfolioImage;
 };
 
@@ -131,26 +130,21 @@ export const homeCategories: HomeCategoryCard[] = [
   {
     href: "/weddings",
     label: "свадьбы",
-    eyebrow: "stories",
     image: galleryImages.weddings[1],
   },
   {
     href: "/family",
     label: "семья",
-    eyebrow: "kin",
     image: galleryImages.family[0],
   },
   {
     href: "/portraits",
     label: "портреты",
-    eyebrow: "gaze",
     image: galleryImages.portraits[0],
   },
 ];
 
 export const heroImage = galleryImages.weddings[0];
-
-export const aboutTitle = "Арина\nЗырянова";
 
 export const bioText =
   "Аринка-Кабардинка ака Варя Дымная. Коллекционирую добрые истории, фотографирую людей и ем баклажановую икру. Хожу по лесам, ловлю рыбов, собираю ягодки и разговариваю по душам. Снимаю свадьбы, семьи и портреты — тихо, близко, на плёнку и цифру. Кубань — Алтай — Киргизия — Япония — и дальше.";
@@ -162,22 +156,19 @@ export const defaultSocialLinks: SocialLink[] = [
 
 export const galleryPageCopy: Record<
   GalleryCategory,
-  { eyebrow: string; title: string; description: string }
+  { title: string; description: string }
 > = {
   weddings: {
-    eyebrow: "weddings",
     title: "свадьбы",
     description:
       "Истории, где важны не только большие моменты, но и почти незаметные жесты. Тёплые кадры с воздухом, движением и вниманием к близости.",
   },
   family: {
-    eyebrow: "family",
     title: "семья",
     description:
       "Неспешные кадры про тепло, дом, прогулки и ту близость, которая читается в руках, в расстоянии между людьми и в том, как они смотрят друг на друга.",
   },
   portraits: {
-    eyebrow: "portraits",
     title: "портреты",
     description:
       "Портреты без лишнего шума: зерно, воздух, мягкий свет и внимание к состоянию человека. Неброско, близко и с характером.",

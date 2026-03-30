@@ -13,13 +13,13 @@ export default async function FamilyPage() {
   return (
     <>
       <GalleryPage
-        eyebrow={gallery.eyebrow}
         title={gallery.title}
         description={gallery.description}
         images={gallery.images}
       />
       <Footer
         photographerName={home.photographerName}
+        footerCopy={home.footerCopy}
         socialLinks={home.socialLinks}
       />
     </>

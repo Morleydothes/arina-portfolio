@@ -18,6 +18,18 @@ export const siteSettingsType = defineType({
       to: [{ type: "photo" }],
     }),
     defineField({
+      name: "heroIntro",
+      title: "Hero Intro",
+      type: "text",
+      rows: 3,
+    }),
+    defineField({
+      name: "footerCopy",
+      title: "Footer Copy",
+      type: "text",
+      rows: 3,
+    }),
+    defineField({
       name: "instagramUrl",
       title: "Instagram URL",
       type: "url",

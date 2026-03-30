@@ -7,7 +7,6 @@ import { Navigation } from "./navigation";
 import { PageReveal } from "./page-reveal";
 
 type GalleryPageProps = {
-  eyebrow: string;
   title: string;
   description: string;
   images: PortfolioImage[];
