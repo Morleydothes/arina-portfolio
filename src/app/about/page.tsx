@@ -22,24 +22,24 @@ export default async function AboutPage() {
           <section className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
             <Reveal className="space-y-8 lg:sticky lg:top-28">
               <div>
-                <p className="mb-4 text-sm uppercase tracking-[0.4em] text-accent-dark-red/75">
+                <p className="mb-4 text-[11px] lowercase tracking-[0.45em] text-accent-dark-red">
                   about
                 </p>
-                <h1 className="font-display text-5xl leading-none sm:text-7xl">
-                  Арина
+                <h1 className="font-display text-5xl font-normal leading-none tracking-[-0.02em] sm:text-7xl">
+                  арина
                   <br />
-                  Зырянова
+                  зырянова
                 </h1>
               </div>
               {data.bioText ? (
                 <PortableTextContent value={data.bioText as PortableTextBlock[]} />
               ) : (
-                <p className="max-w-xl text-base leading-8 text-text-ink-black/72 sm:text-lg">
+                <p className="max-w-xl text-base leading-relaxed text-text-ink-black/72 sm:text-lg">
                   {data.fallbackBioText}
                 </p>
               )}
-              <div className="space-y-4 rounded-[2rem] border border-text-ink-black/10 bg-white/55 p-6 backdrop-blur">
-                <p className="text-sm uppercase tracking-[0.35em] text-text-ink-black/55">
+              <div className="space-y-4 border border-text-ink-black/10 bg-white/55 p-6 backdrop-blur">
+                <p className="text-[11px] lowercase tracking-[0.4em] text-text-ink-black/55">
                   contact
                 </p>
                 <SocialLinks links={data.socialLinks} />
@@ -53,8 +53,8 @@ export default async function AboutPage() {
                   delay={index * 0.08}
                   className={index === 0 ? "sm:col-span-2" : ""}
                 >
-                  <div className="grain-frame overflow-hidden rounded-[2rem] bg-white p-3 shadow-soft">
-                    <div className="relative overflow-hidden rounded-[1.4rem]">
+                  <div className="grain-frame overflow-hidden border border-text-ink-black/8 bg-white p-3 shadow-soft">
+                    <div className="relative overflow-hidden">
                       <Image
                         src={image.src}
                         alt={image.alt}

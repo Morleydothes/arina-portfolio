@@ -11,6 +11,7 @@ const inter = Inter({
 const playfairDisplay = Playfair_Display({
   variable: "--font-playfair",
   subsets: ["latin", "cyrillic"],
+  weight: ["400", "500"],
 });
 
 export const metadata: Metadata = {
@@ -34,7 +35,7 @@ export default function RootLayout({
       lang="ru"
       className={`${inter.variable} ${playfairDisplay.variable} h-full`}
     >
-      <body className="min-h-full bg-bg-warm-paper text-text-ink-black">
+      <body className="min-h-full bg-bg-warm-paper text-text-ink-black font-sans">
         {children}
       </body>
     </html>

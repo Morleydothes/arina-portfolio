@@ -15,14 +15,14 @@ export function PreviewGrid({ categories }: PreviewGridProps) {
       <div className="mx-auto max-w-7xl">
         <div className="mb-12 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <p className="mb-3 text-sm uppercase tracking-[0.35em] text-accent-dark-red/75">
+            <p className="mb-3 text-[11px] lowercase tracking-[0.45em] text-accent-dark-red">
               selected work
             </p>
-            <h2 className="font-display text-4xl text-text-ink-black sm:text-5xl">
+            <h2 className="font-display text-4xl font-normal tracking-[-0.02em] text-text-ink-black sm:text-5xl">
               галереи
             </h2>
           </div>
-          <p className="max-w-2xl text-sm leading-7 text-text-ink-black/65 sm:text-base">
+          <p className="max-w-2xl text-sm leading-relaxed text-text-ink-black/68 sm:text-base">
             Камерное портфолио с разными ритмами: свадебные истории, семейные
             прогулки и портреты, где можно задержаться взглядом.
           </p>
@@ -33,28 +33,28 @@ export function PreviewGrid({ categories }: PreviewGridProps) {
             <Reveal key={category.href} delay={index * 0.1}>
               <Link
                 href={category.href}
-                className="group grain-frame block overflow-hidden rounded-[2rem] bg-white/70 p-4 shadow-soft transition-transform duration-500 hover:-translate-y-1"
+                className="group grain-frame block overflow-hidden border border-text-ink-black/8 bg-white/45 p-4 shadow-soft transition-transform duration-500 hover:-translate-y-1"
               >
-                <div className="relative aspect-[3/4] overflow-hidden rounded-[1.5rem]">
+                <div className="relative aspect-[3/4] overflow-hidden">
                   <Image
                     src={category.image.src}
                     alt={category.image.alt}
                     fill
                     placeholder={category.image.blurDataURL ? "blur" : "empty"}
                     blurDataURL={category.image.blurDataURL}
-                    className="object-cover transition duration-700 group-hover:scale-[1.04]"
+                    className="object-cover transition duration-700 group-hover:scale-[1.03]"
                   />
                 </div>
-                <div className="flex items-end justify-between gap-4 px-2 pb-2 pt-5">
+                <div className="flex items-end justify-between gap-4 px-1 pb-1 pt-5">
                   <div>
-                    <p className="mb-2 text-xs uppercase tracking-[0.45em] text-accent-dark-red/70">
+                    <p className="mb-2 text-[10px] lowercase tracking-[0.5em] text-accent-dark-red">
                       {category.eyebrow}
                     </p>
-                    <p className="text-2xl lowercase text-text-ink-black">
+                    <p className="text-2xl lowercase tracking-[-0.01em] text-text-ink-black">
                       {category.label}
                     </p>
                   </div>
-                  <span className="text-sm uppercase tracking-[0.35em] text-text-ink-black/45 transition-colors group-hover:text-accent-dark-red">
+                  <span className="text-[11px] lowercase tracking-[0.32em] text-text-ink-black/45 transition-colors group-hover:text-accent-dark-red">
                     open
                   </span>
                 </div>
