@@ -19,7 +19,7 @@ export function Footer({
   socialLinks = defaultSocialLinks,
 }: FooterProps) {
   return (
-    <footer className="border-t border-text-ink-black/10 px-6 py-10 sm:px-10 lg:px-16">
+    <footer className="border-t border-text-ink-black/10 bg-bg-warm-paper px-6 py-10 sm:px-10 lg:px-16">
       <div className="mx-auto flex max-w-7xl flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
         <div className="space-y-3">
           <p className="font-display text-2xl font-normal tracking-[-0.02em] text-text-ink-black">
