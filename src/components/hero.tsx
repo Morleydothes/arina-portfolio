@@ -54,7 +54,7 @@ export function Hero({ image, name, intro = defaultSiteIntro }: HeroProps) {
           </h1>
         </div>
 
-        <div className="hidden max-w-xs self-end border border-white/18 bg-white/8 p-6 text-sm leading-relaxed text-white/82 backdrop-blur-md lg:block">
+        <div className="hidden max-w-xs self-end border border-white/18 bg-white/8 p-6 text-base leading-relaxed text-white/82 backdrop-blur-md lg:block">
           {intro}
         </div>
       </div>
