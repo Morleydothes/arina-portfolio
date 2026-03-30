@@ -30,7 +30,7 @@ export function MasonryGrid({ images }: MasonryGridProps) {
 
   return (
     <>
-      <div className="columns-1 gap-6 md:columns-2 xl:columns-3">
+      <div className="columns-1 gap-7 md:columns-2 xl:columns-3">
         {images.map((image, index) => (
           <motion.button
             key={`${image.src}-${index}`}
@@ -40,8 +40,8 @@ export function MasonryGrid({ images }: MasonryGridProps) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.7, delay: index * 0.08 }}
-            whileHover={{ y: -6 }}
-            className="grain-frame group mb-6 block w-full break-inside-avoid overflow-hidden border border-text-ink-black/8 bg-white p-3 text-left shadow-soft"
+            whileHover={{ y: -4 }}
+            className="group mb-7 block w-full break-inside-avoid overflow-hidden text-left"
           >
             <div className="relative overflow-hidden">
               <Image
@@ -51,7 +51,7 @@ export function MasonryGrid({ images }: MasonryGridProps) {
                 height={image.height}
                 placeholder={image.blurDataURL ? "blur" : "empty"}
                 blurDataURL={image.blurDataURL}
-                className="h-auto w-full object-cover transition duration-700 group-hover:scale-[1.025]"
+                className="h-auto w-full object-cover transition duration-700 group-hover:scale-[1.02]"
               />
             </div>
           </motion.button>

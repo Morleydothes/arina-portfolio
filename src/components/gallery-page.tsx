@@ -14,7 +14,6 @@ type GalleryPageProps = {
 };
 
 export function GalleryPage({
-  eyebrow,
   title,
   description,
   images,
@@ -25,10 +24,7 @@ export function GalleryPage({
       <main className="px-6 pb-20 pt-8 sm:px-10 lg:px-16 lg:pb-24">
         <section className="mx-auto flex max-w-7xl flex-col gap-10 border-b border-text-ink-black/10 pb-12 pt-8 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-3xl">
-            <p className="mb-4 text-[11px] lowercase tracking-[0.45em] text-accent-dark-red">
-              {eyebrow}
-            </p>
-            <h1 className="font-display text-5xl font-normal leading-none tracking-[-0.02em] sm:text-7xl">
+            <h1 className="font-display text-5xl font-normal leading-none tracking-[-0.02em] text-text-ink-black sm:text-7xl">
               {title}
             </h1>
           </div>
@@ -36,7 +32,7 @@ export function GalleryPage({
             <p>{description}</p>
             <Link
               href="/about"
-              className="inline-flex items-center gap-2 lowercase tracking-[0.18em] transition-colors hover:text-accent-dark-red"
+              className="inline-flex items-center gap-2 lowercase tracking-[0.18em] text-text-ink-black transition-colors hover:text-accent-dark-red"
             >
               about
               <span aria-hidden>↗</span>

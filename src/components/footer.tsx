@@ -29,8 +29,8 @@ export function Footer({
             {defaultFooterCopy}
           </p>
         </div>
-        <div className="space-y-5 text-sm text-text-ink-black/70">
-          <nav className="flex flex-col gap-3 lowercase tracking-[0.18em] lg:items-end">
+        <div className="space-y-5 text-sm text-text-ink-black">
+          <nav className="flex flex-col gap-4 lowercase leading-relaxed tracking-[0.18em] lg:items-end">
             <Link href="/">главная</Link>
             <Link href="/weddings">свадьбы</Link>
             <Link href="/family">семья</Link>

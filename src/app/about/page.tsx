@@ -25,7 +25,7 @@ export default async function AboutPage() {
                 <p className="mb-4 text-[11px] lowercase tracking-[0.45em] text-accent-dark-red">
                   about
                 </p>
-                <h1 className="font-display text-5xl font-normal leading-none tracking-[-0.02em] sm:text-7xl">
+                <h1 className="font-display text-5xl font-normal leading-none tracking-[-0.02em] text-text-ink-black sm:text-7xl">
                   арина
                   <br />
                   зырянова
@@ -38,7 +38,7 @@ export default async function AboutPage() {
                   {data.fallbackBioText}
                 </p>
               )}
-              <div className="space-y-4 border border-text-ink-black/10 bg-white/55 p-6 backdrop-blur">
+              <div className="space-y-4 border border-text-ink-black/10 bg-white/45 p-6 backdrop-blur">
                 <p className="text-[11px] lowercase tracking-[0.4em] text-text-ink-black/55">
                   contact
                 </p>
@@ -53,7 +53,7 @@ export default async function AboutPage() {
                   delay={index * 0.08}
                   className={index === 0 ? "sm:col-span-2" : ""}
                 >
-                  <div className="grain-frame overflow-hidden border border-text-ink-black/8 bg-white p-3 shadow-soft">
+                  <div className="overflow-hidden">
                     <div className="relative overflow-hidden">
                       <Image
                         src={image.src}
